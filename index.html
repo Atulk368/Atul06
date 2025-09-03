@@ -242,6 +242,86 @@
   });
 </script>
 
+    <!-- LIGHTBOX SCRIPT WITH NAVIGATION -->
+<script>
+  const lightboxLinks = Array.from(document.querySelectorAll('.lightbox'));
+  let currentIndex = -1;
+
+  function openLightbox(index) {
+    const link = lightboxLinks[index];
+    if (!link) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <img src="${link.href}" alt="">
+      <span class="close">&times;</span>
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    `;
+    document.body.appendChild(overlay);
+    setTimeout(()=> overlay.classList.add('show'), 10);
+
+    overlay.querySelector('.close').addEventListener('click', closeLightbox);
+    overlay.querySelector('.prev').addEventListener('click', ()=> navigate(-1));
+    overlay.querySelector('.next').addEventListener('click', ()=> navigate(1));
+
+    function closeLightbox() {
+      overlay.classList.remove('show');
+      setTimeout(()=> overlay.remove(), 300);
+    }
+
+    function navigate(direction) {
+      currentIndex = (currentIndex + direction + lightboxLinks.length) % lightboxLinks.length;
+      overlay.querySelector('img').src = lightboxLinks[currentIndex].href;
+    }
+
+    // Keyboard controls
+    document.addEventListener('keydown', function keyHandler(e) {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") navigate(-1);
+      if (e.key === "ArrowRight") navigate(1);
+      if (!document.body.contains(overlay)) {
+        document.removeEventListener('keydown', keyHandler);
+      }
+    });
+  }
+
+  lightboxLinks.forEach((link, i) => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      currentIndex = i;
+      openLightbox(currentIndex);
+    });
+  });
+</script>
+
+    <style>
+  .lightbox-overlay span.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+  .lightbox-overlay span.prev,
+  .lightbox-overlay span.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: white;
+    cursor: pointer;
+    padding: 0 12px;
+    user-select: none;
+  }
+  .lightbox-overlay span.prev { left: 20px; }
+  .lightbox-overlay span.next { right: 20px; }
+  .lightbox-overlay span.prev:hover,
+  .lightbox-overlay span.next:hover { color: var(--brand); }
+</style>
+
+
 
     <!-- EXPERIENCE -->
 <section id="experience" class="container reveal">
@@ -342,6 +422,46 @@
 
   </div>
 </section>
+
+    <!-- AWARDS -->
+<section id="achievements" class="container reveal">
+  <div class="section-title">Recognition</div>
+  <h2>Awards & Appreciation</h2>
+  <div class="achv">
+
+    <div class="card">
+      <a href="WhatsApp Image 2025-09-01 at 14.02.41 (2).jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 14.02.41 (2).jpeg" alt="Carnival Cruise Lines letter of introduction for Atul Kanade" style="width:120px; border-radius:10px;" />
+      </a>
+      <div>
+        <strong>Carnival Cruise Lines</strong><br>
+        Letter of Introduction (2003) acknowledging reliability, honesty & professionalism as Chef de Partie.
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="WhatsApp Image 2025-09-01 at 14.02.41 (1).jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 14.02.41 (1).jpeg" alt="Carnival Cruise Lines letter confirming Atul Kanade's employment" style="width:120px; border-radius:10px;" />
+      </a>
+      <div>
+        <strong>Carnival Cruise Lines</strong><br>
+        Employment Confirmation (2002) recognizing consistent performance and culinary contributions.
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="WhatsApp Image 2025-09-01 at 14.02.41.jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 14.02.41.jpeg" alt="Carnival Cruise Lines appreciation letter for Atul Kanade" style="width:120px; border-radius:10px;" />
+      </a>
+      <div>
+        <strong>Carnival Cruise Lines</strong><br>
+        Appreciation Letter (2002) celebrating 3 years of service and valuable contributions to guest experience.
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 
     <!-- (rest of the sections remain unchanged) -->
