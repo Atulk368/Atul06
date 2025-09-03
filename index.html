@@ -140,6 +140,109 @@
       </div>
     </section>
 
+    <!-- GALLERY -->
+<section id="gallery" class="container reveal">
+  <div class="section-title">Portfolio</div>
+  <h2>Gallery</h2>
+  <div class="gallery">
+
+    <figure>
+      <a href="WhatsApp Image 2025-09-01 at 13.53.35.jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 13.53.35.jpeg" alt="Festive roast chicken platter with vegetables and desserts" />
+      </a>
+      <figcaption>Festive Roast Platter</figcaption>
+    </figure>
+
+    <figure>
+      <a href="WhatsApp Image 2025-09-01 at 13.49.15.jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 13.49.15.jpeg" alt="Grilled chicken with pomegranate and herbs" />
+      </a>
+      <figcaption>Grilled Chicken with Pomegranate</figcaption>
+    </figure>
+
+    <figure>
+      <a href="WhatsApp Image 2025-09-01 at 13.46.17 (1).jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 13.46.17 (1).jpeg" alt="Crispy sesame-coated starter with salad" />
+      </a>
+      <figcaption>Sesame-Crusted Starter</figcaption>
+    </figure>
+
+    <figure>
+      <a href="WhatsApp Image 2025-09-01 at 13.46.17.jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 13.46.17.jpeg" alt="Paneer starter with black sesame and greens" />
+      </a>
+      <figcaption>Paneer with Sesame & Greens</figcaption>
+    </figure>
+
+    <figure>
+      <a href="WhatsApp Image 2025-09-01 at 13.46.16 (2).jpeg" class="lightbox">
+        <img src="WhatsApp Image 2025-09-01 at 13.46.16 (2).jpeg" alt="Spiced grilled chicken with herbs" />
+      </a>
+      <figcaption>Spiced Grilled Chicken</figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX STYLES -->
+<style>
+  .lightbox-overlay {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease;
+    z-index: 9999;
+  }
+  .lightbox-overlay.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .lightbox-overlay img {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  }
+  .lightbox-overlay span {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+
+<!-- LIGHTBOX SCRIPT -->
+<script>
+  document.querySelectorAll('.lightbox').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      overlay.innerHTML = `
+        <img src="${link.href}" alt="">
+        <span>&times;</span>
+      `;
+      document.body.appendChild(overlay);
+      setTimeout(()=> overlay.classList.add('show'), 10);
+
+      overlay.addEventListener('click', e => {
+        if(e.target === overlay || e.target.tagName === 'SPAN'){
+          overlay.classList.remove('show');
+          setTimeout(()=> overlay.remove(), 300);
+        }
+      });
+    });
+  });
+</script>
+
+
     <!-- EXPERIENCE -->
 <section id="experience" class="container reveal">
   <div class="section-title">Professional Journey</div>
